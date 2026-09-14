@@ -50,4 +50,4 @@ User-agent: ImagesiftBot
 allow: /
 
 # Sitemap
-Sitemap: https://edusidegum.github.io/tatiana/sitemap.xml
+Sitemap: https://edusidegum.github.io/demo/restaurantedavovosapiranga/sitemap.xml

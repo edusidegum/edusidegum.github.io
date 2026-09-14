@@ -42,7 +42,7 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://edusidegum.github.io/wille/sitemap.xml
+Sitemap: https://edusidegum.github.io/demo/wille/sitemap.xml
 
 # ──────────────────────────────────────────────────────────────
 #  BUSCADORES TRADICIONAIS — indexação total e irrestrita
@@ -135,4 +135,4 @@ Crawl-delay: 10
 # ──────────────────────────────────────────────────────────────
 #  SITEMAP
 # ──────────────────────────────────────────────────────────────
-Sitemap: https://edusidegum.github.io/wille/sitemap.xml
+Sitemap: https://edusidegum.github.io/demo/wille/sitemap.xml

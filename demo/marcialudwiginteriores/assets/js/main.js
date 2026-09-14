@@ -15,7 +15,7 @@
 (() => {
   // URL relativa do arquivo de dados e URL de fallback do Instagram.
   const POSTS_URL = "data/posts.json";
-  const INSTAGRAM_FALLBACK_URL = "https://www.instagram.com/marcialudwiginteriores/";
+  const INSTAGRAM_FALLBACK_URL = "https://www.instagram.com/demo/marcialudwiginteriores/";
 
   /**
    * Atualiza os elementos da seção "Do Instagram" com os dados do post.
