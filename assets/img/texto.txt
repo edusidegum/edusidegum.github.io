@@ -1,0 +1,1 @@
+O HTML referencia quatro assets que precisam ser criados antes do deploy: /assets/img/seo1.webp, /assets/img/seo2.webp, /assets/img/og-index-1200x630.webp e /favicon.ico. Se seo1/seo2 não existirem, o bloco de retenção — que é exatamente o que você pediu para segurar o leitor — quebra visualmente. Sugestão de dimensão: 1200×750 WebP sob 120 KB cada.
