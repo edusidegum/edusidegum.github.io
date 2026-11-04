@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edu Sidegum — Arquitetura de Soluções Digitais</title>
+<meta name="description" content="Arquitetura de soluções digitais: briefing, desenho do projeto e conexão com a implementação. Projetar antes de implementar. Conectar sem desestruturar.">
+<meta name="author" content="Edu Sidegum">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://edusidegum.github.io/edusidegum/sobre.html">
+<link rel="icon" type="image/png" href="img/favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Edu Sidegum — Arquitetura de Soluções Digitais">
+<meta property="og:description" content="Projetar antes de implementar. Conectar sem desestruturar. Arquitetura de soluções digitais para pequenos e médios negócios.">
+<meta property="og:url" content="https://edusidegum.github.io/edusidegum/sobre.html">
+<meta property="og:image" content="img/og-image-e.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Edu Sidegum — Arquitetura de Soluções Digitais">
+<meta name="twitter:description" content="Projetar antes de implementar. Conectar sem desestruturar.">
+<meta name="twitter:image" content="img/og-image-e.png">
+
+<!-- JSON-LD: Person + WebPage (E-E-A-T) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://edusidegum.github.io/edusidegum/#person",
+      "name": "Edu Sidegum",
+      "jobTitle": "Arquiteto de Soluções Digitais",
+      "description": "Bacharel em Sistemas de Informação. Arquitetura de soluções digitais: briefing, desenho do projeto e conexão com a implementação.",
+      "url": "https://edusidegum.github.io/edusidegum/sobre.html",
+      "image": "https://edusidegum.github.io/edusidegum/img/og-image-e.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://edusidegum.github.io/edusidegum/sobre.html#webpage",
+      "url": "https://edusidegum.github.io/edusidegum/sobre.html",
+      "title": "Edu Sidegum — Arquitetura de Soluções Digitais",
+      "description": "Projetar antes de implementar. Conectar sem desestruturar. Arquitetura de soluções digitais para pequenos e médios negócios.",
+      "author": { "@id": "https://edusidegum.github.io/edusidegum/#person" },
+      "inLanguage": "pt-BR"
+    }
+  ]
+}
+</script>
+
+<style>
+/* ===== RESET & TOKENS ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e14;
+  --bg-2:#0f141c;
+  --bg-3:#151c28;
+  --surface:rgba(21,28,40,.6);
+  --border:rgba(255,255,255,.06);
+  --border-bright:rgba(255,255,255,.12);
+  --text:#e6edf3;
+  --text-dim:#8b949e;
+  --text-faint:#484f58;
+  --accent:#58a6ff;
+  --accent-2:#79c0ff;
+  --green:#3fb950;
+  --purple:#bc8cff;
+  --amber:#d29922;
+  --red:#f85149;
+  --grad-hero:linear-gradient(135deg,#58a6ff 0%,#bc8cff 50%,#3fb950 100%);
+  --grad-text:linear-gradient(135deg,#79c0ff 0%,#bc8cff 100%);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code',monospace;
+  --font-display:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg-3);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--border-bright)}
+
+/* ===== SKIP LINK ===== */
+.skip-link{
+  position:absolute;top:-100px;left:1rem;z-index:9999;
+  background:var(--accent);color:var(--bg);padding:.75rem 1.5rem;
+  border-radius:0 0 8px 8px;font-weight:600;text-decoration:none;
+  transition:top .3s var(--ease-out);
+}
+.skip-link:focus{top:0}
+
+/* ===== PROGRESS BAR ===== */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:var(--grad-hero);z-index:9998;
+  transition:width .1s linear;
+}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;
+  transition:all .4s var(--ease-out);
+  background:rgba(10,14,20,0);
+  backdrop-filter:blur(0px);
+}
+.nav.scrolled{
+  background:rgba(10,14,20,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:.85rem 2rem;
+}
+.nav-logo{
+  font-family:var(--font-mono);font-size:.95rem;font-weight:600;
+  color:var(--text);text-decoration:none;letter-spacing:-.02em;
+  display:flex;align-items:center;gap:.5rem;
+}
+.nav-logo::before{
+  content:'';width:10px;height:10px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 12px var(--green);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(.85)}
+}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{
+  color:var(--text-dim);text-decoration:none;font-size:.85rem;font-weight:500;
+  transition:color .3s var(--ease-out);position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+  background:var(--accent);transition:width .3s var(--ease-out);
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  padding:.5rem 1.25rem;border:1px solid var(--border-bright);border-radius:6px;
+  color:var(--text)!important;font-size:.8rem!important;
+  transition:all .3s var(--ease-out);
+}
+.nav-cta:hover{border-color:var(--accent);background:rgba(88,166,255,.08)}
+.nav-cta::after{display:none}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,rgba(88,166,255,.08) 0%,transparent 50%),
+             radial-gradient(ellipse at 80% 80%,rgba(188,140,255,.06) 0%,transparent 50%),
+             var(--bg);
+}
+/* Parallax grid background */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+  will-change:transform;
+}
+/* Floating orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;
+  will-change:transform;pointer-events:none;
+}
+.orb-1{width:500px;height:500px;background:var(--accent);top:-10%;left:-10%;animation:float-orb 20s ease-in-out infinite}
+.orb-2{width:400px;height:400px;background:var(--purple);bottom:-15%;right:-10%;animation:float-orb 25s ease-in-out infinite reverse}
+.orb-3{width:300px;height:300px;background:var(--green);top:40%;right:20%;animation:float-orb 18s ease-in-out infinite}
+@keyframes float-orb{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.1)}
+  66%{transform:translate(-30px,40px) scale(.95)}
+}
+
+.hero-content{
+  position:relative;z-index:2;text-align:center;max-width:900px;
+  padding:0 2rem;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-mono);font-size:.75rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--green);
+  padding:.4rem 1rem;border:1px solid rgba(63,185,80,.2);border-radius:100px;
+  background:rgba(63,185,80,.05);margin-bottom:2rem;
+  opacity:0;transform:translateY(20px);
+  animation:fade-up .8s var(--ease-out) .2s forwards;
+}
+.hero-eyebrow .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+.hero-title{
+  font-size:clamp(2.5rem,7vw,5.5rem);font-weight:800;line-height:1.05;
+  letter-spacing:-.03em;margin-bottom:1.5rem;
+  opacity:0;transform:translateY(30px);
+  animation:fade-up 1s var(--ease-out) .4s forwards;
+}
+.hero-title .grad{
+  background:var(--grad-text);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-tagline{
+  font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--text-dim);
+  font-weight:400;line-height:1.5;margin-bottom:3rem;
+  opacity:0;transform:translateY(30px);
+  animation:fade-up 1s var(--ease-out) .6s forwards;
+}
+.hero-tagline strong{color:var(--text);font-weight:600}
+.hero-credentials{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;
+  opacity:0;transform:translateY(30px);
+  animation:fade-up 1s var(--ease-out) .8s forwards;
+}
+.cred-tag{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--text-dim);
+  padding:.4rem .9rem;border:1px solid var(--border);border-radius:6px;
+  background:var(--surface);backdrop-filter:blur(10px);
+  transition:all .3s var(--ease-out);
+}
+.cred-tag:hover{border-color:var(--border-bright);color:var(--text);transform:translateY(-2px)}
+
+/* Scroll indicator */
+.scroll-indicator{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fade-up 1s var(--ease-out) 1.2s forwards;
+}
+.scroll-indicator span{
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-faint);
+}
+.scroll-line{
+  width:1px;height:40px;background:linear-gradient(to bottom,var(--text-faint),transparent);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:0;left:0;width:100%;height:50%;
+  background:var(--accent);animation:scroll-down 2s ease-in-out infinite;
+}
+@keyframes scroll-down{
+  0%{top:-50%}100%{top:100%}
+}
+
+@keyframes fade-up{
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== MANIFESTO ===== */
+.manifesto{
+  position:relative;padding:10rem 2rem;text-align:center;
+  overflow:hidden;
+}
+.manifesto::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--border-bright));
+}
+.manifesto-quote{
+  font-size:clamp(1.8rem,5vw,3.5rem);font-weight:300;line-height:1.3;
+  letter-spacing:-.02em;max-width:900px;margin:0 auto;
+  position:relative;
+}
+.manifesto-quote .highlight{
+  font-weight:700;
+  background:var(--grad-text);-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;
+}
+.manifesto-quote::before{
+  content:'"';position:absolute;top:-3rem;left:50%;transform:translateX(-50%);
+  font-size:8rem;color:var(--text-faint);opacity:.15;
+  font-family:Georgia,serif;line-height:1;
+}
+.manifesto-text{
+  max-width:700px;margin:3rem auto 0;font-size:1.15rem;color:var(--text-dim);
+  line-height:1.8;
+}
+
+/* ===== SECTION BASE ===== */
+.section{
+  position:relative;padding:8rem 2rem;
+  max-width:1200px;margin:0 auto;
+}
+.section-label{
+  font-family:var(--font-mono);font-size:.75rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.section-label::before{
+  content:'';width:24px;height:1px;background:var(--accent);
+}
+.section-title{
+  font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.02em;
+  margin-bottom:1.5rem;line-height:1.15;
+}
+.section-intro{
+  font-size:1.15rem;color:var(--text-dim);max-width:700px;
+  margin-bottom:4rem;line-height:1.8;
+}
+
+/* ===== PILARES (3 cards) ===== */
+.pilares{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+}
+.pilar-card{
+  position:relative;padding:2.5rem 2rem;
+  background:var(--surface);backdrop-filter:blur(10px);
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:all .5s var(--ease-out);
+}
+.pilar-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--accent);transition:height .5s var(--ease-out);
+}
+.pilar-card:hover{
+  transform:translateY(-6px);border-color:var(--border-bright);
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.pilar-card:hover::before{height:100%}
+.pilar-num{
+  font-family:var(--font-mono);font-size:.75rem;color:var(--text-faint);
+  margin-bottom:1rem;letter-spacing:.1em;
+}
+.pilar-icon{
+  width:48px;height:48px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;font-size:1.5rem;
+  background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.15);
+}
+.pilar-card:nth-child(2) .pilar-icon{background:rgba(188,140,255,.08);border-color:rgba(188,140,255,.15)}
+.pilar-card:nth-child(3) .pilar-icon{background:rgba(63,185,80,.08);border-color:rgba(63,185,80,.15)}
+.pilar-title{
+  font-size:1.35rem;font-weight:700;margin-bottom:1rem;
+  letter-spacing:-.01em;
+}
+.pilar-text{color:var(--text-dim);font-size:.95rem;line-height:1.7}
+
+/* ===== FORMAÇÃO (timeline) ===== */
+.formacao{
+  position:relative;padding:8rem 2rem;
+  background:var(--bg-2);
+}
+.formacao-inner{max-width:900px;margin:0 auto}
+.timeline{
+  position:relative;padding-left:2.5rem;
+}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,var(--accent),var(--purple),var(--green));
+}
+.timeline-item{
+  position:relative;padding-bottom:3rem;
+  opacity:0;transform:translateX(-20px);
+  transition:all .8s var(--ease-out);
+}
+.timeline-item.visible{opacity:1;transform:translateX(0)}
+.timeline-item::before{
+  content:'';position:absolute;left:-2.5rem;top:.5rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg-2);border:2px solid var(--accent);
+  transform:translateX(-5px);transition:all .3s var(--ease-out);
+}
+.timeline-item:nth-child(2)::before{border-color:var(--purple)}
+.timeline-item:nth-child(3)::before{border-color:var(--green)}
+.timeline-item.visible::before{
+  box-shadow:0 0 0 4px rgba(88,166,255,.1);
+}
+.timeline-item:nth-child(2).visible::before{box-shadow:0 0 0 4px rgba(188,140,255,.1)}
+.timeline-item:nth-child(3).visible::before{box-shadow:0 0 0 4px rgba(63,185,80,.1)}
+.timeline-label{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-faint);margin-bottom:.5rem;
+}
+.timeline-title{font-size:1.2rem;font-weight:600;margin-bottom:.75rem}
+.timeline-text{color:var(--text-dim);font-size:.95rem;line-height:1.7;max-width:650px}
+
+/* ===== PARA QUEM ===== */
+.para-quem{
+  position:relative;padding:10rem 2rem;text-align:center;
+  overflow:hidden;
+}
+.para-quem-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(88,166,255,.04) 0%,transparent 60%);
+}
+.para-quem-content{position:relative;z-index:2;max-width:750px;margin:0 auto}
+.para-quem-text{
+  font-size:clamp(1.2rem,2.5vw,1.6rem);line-height:1.6;color:var(--text);
+  font-weight:300;
+}
+.para-quem-text strong{font-weight:700;color:var(--accent-2)}
+
+/* ===== CTA ===== */
+.cta{
+  position:relative;padding:8rem 2rem;text-align:center;
+  overflow:hidden;
+}
+.cta::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent,rgba(88,166,255,.03),transparent);
+}
+.cta-content{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.cta-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;
+  letter-spacing:-.02em;margin-bottom:1rem;
+}
+.cta-text{color:var(--text-dim);margin-bottom:2.5rem;font-size:1.1rem}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:.75rem;
+  padding:1rem 2rem;background:var(--green);color:#fff;
+  text-decoration:none;border-radius:8px;font-weight:600;
+  font-size:1rem;transition:all .3s var(--ease-out);
+  box-shadow:0 4px 20px rgba(63,185,80,.3);
+}
+.cta-btn:hover{
+  transform:translateY(-2px);box-shadow:0 8px 30px rgba(63,185,80,.4);
+}
+.cta-btn svg{width:20px;height:20px}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:3rem 2rem;border-top:1px solid var(--border);
+  text-align:center;
+}
+.footer-text{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--text-faint);
+  letter-spacing:.05em;
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ===== PARALLAX DATA ATTRIBUTES ===== */
+[data-parallax]{will-change:transform}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav{padding:1rem}
+  .nav-links{gap:1rem}
+  .nav-links a:not(.nav-cta){display:none}
+  .section{padding:5rem 1.5rem}
+  .manifesto{padding:6rem 1.5rem}
+  .formacao{padding:5rem 1.5rem}
+  .para-quem{padding:6rem 1.5rem}
+  .cta{padding:5rem 1.5rem}
+  .pilares{grid-template-columns:1fr}
+}
+
+/* ===== REDUCED MOTION ===== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+  [data-parallax]{transform:none!important}
+}
+
+/* ===== FOCUS VISIBLE ===== */
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Tracking pixels (1x1, invisíveis) -->
+<img src="https://catalogoherbalife.com.br/edusidegum" width="1" height="1" style="position:absolute;left:-9999px;top:-9999px;opacity:0;visibility:hidden" alt="" aria-hidden="true">
+<img src="https://edusidegum.github.io/cadastro/cadastro.html" width="1" height="1" style="position:absolute;left:-9999px;top:-9999px;opacity:0;visibility:hidden" alt="" aria-hidden="true">
+
+<!-- NAV -->
+<nav class="nav" id="nav" role="navigation" aria-label="Navegação principal">
+  <a href="https://edusidegum.github.io/edusidegum/" class="nav-logo">edu.sidegum</a>
+  <div class="nav-links">
+    <a href="#manifesto">Manifesto</a>
+    <a href="#pilares">Atuação</a>
+    <a href="#formacao">Formação</a>
+    <a href="https://wa.me/SEU_NUMERO?text=Ol%C3%A1%20Eduardo%2C%20encontrei%20sua%20p%C3%A1gina%20sobre" class="nav-cta" target="_blank" rel="noopener">Contato</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Apresentação">
+    <div class="hero-grid" data-parallax data-speed="0.3"></div>
+    <div class="orb orb-1" data-parallax data-speed="0.15"></div>
+    <div class="orb orb-2" data-parallax data-speed="0.2"></div>
+    <div class="orb orb-3" data-parallax data-speed="0.1"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="dot"></span> Disponível para projetos
+      </div>
+      <h1 class="hero-title">
+        Arquitetura de<br><span class="grad">Soluções Digitais</span>
+      </h1>
+      <p class="hero-tagline">
+        <strong>Projetar antes de implementar.</strong><br>
+        Conectar sem desestruturar.
+      </p>
+      <div class="hero-credentials">
+        <span class="cred-tag">Bacharel em Sistemas de Informação</span>
+        <span class="cred-tag">Arquiteto de Soluções</span>
+        <span class="cred-tag">Briefing → Deploy</span>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto" id="manifesto" aria-label="Manifesto">
+    <div class="manifesto-quote reveal">
+      Bacharel em Sistemas de Informação — uma formação que não ensina uma linguagem específica, mas ensina a <span class="highlight">pensar sistemas completos</span>: como os dados se organizam, como as páginas se conectam, como a informação flui entre o usuário e o negócio.
+    </div>
+    <p class="manifesto-text reveal reveal-delay-1">
+      Isso é arquitetura, não implementação.
+    </p>
+  </section>
+
+  <!-- ATUAÇÃO -->
+  <section class="section" id="pilares" aria-label="Atuação">
+    <div class="section-label reveal">O Que Isso Significa na Prática</div>
+    <h2 class="section-title reveal reveal-delay-1">Três tempos de um mesmo projeto</h2>
+    <p class="section-intro reveal reveal-delay-2">
+      Minha atuação se aproxima do que o mercado reconhece como Arquiteto de Informação ou Arquiteto de Soluções Digitais — o profissional que realiza o briefing, desenha o projeto, define as conexões e funcionalidades, e entrega uma solução ajustada à realidade da empresa, sem exigir que ela altere seus processos internos para se adaptar à tecnologia.
+    </p>
+
+    <div class="pilares">
+      <article class="pilar-card reveal">
+        <div class="pilar-num">01 / Diagnóstico</div>
+        <div class="pilar-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h3 class="pilar-title">Briefing e Diagnóstico</h3>
+        <p class="pilar-text">
+          Antes de qualquer definição técnica, o trabalho é de escuta e organização. Onde estão os dados? Como o cliente encontra o que precisa? Qual o fluxo atual — e qual deveria ser? O entregável não é código, é clareza.
+        </p>
+      </article>
+
+      <article class="pilar-card reveal reveal-delay-1">
+        <div class="pilar-num">02 / Estrutura</div>
+        <div class="pilar-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m10 0h6M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg>
+        </div>
+        <h3 class="pilar-title">Desenho da Solução</h3>
+        <p class="pilar-text">
+          Com o diagnóstico feito, o projeto é estruturado: mapa do site, conexões entre páginas, funcionalidades necessárias, integrações com ferramentas que a empresa já utiliza. O objetivo é que a solução se encaixe no negócio, e não o contrário.
+        </p>
+      </article>
+
+      <article class="pilar-card reveal reveal-delay-2">
+        <div class="pilar-num">03 / Ponte</div>
+        <div class="pilar-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M5 12l4-4M5 12l4 4M19 12l-4-4M19 12l-4 4"/></svg>
+        </div>
+        <h3 class="pilar-title">Conexão com a Implementação</h3>
+        <p class="pilar-text">
+          O projeto executivo documentado serve de ponte entre a necessidade do cliente e quem vai implementar — seja uma equipe técnica, um profissional selecionado para a execução, ou o próprio cliente com ferramentas adequadas. Meu papel é garantir que o que foi desenhado seja executável, não necessariamente executá-lo pessoalmente em cada camada.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORMAÇÃO -->
+  <section class="formacao" id="formacao" aria-label="Formação e Base">
+    <div class="formacao-inner">
+      <div class="section-label reveal">Formação e Base</div>
+      <h2 class="section-title reveal reveal-delay-1">De onde vem o método</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-label">Fundação Acadêmica</div>
+          <h3 class="timeline-title">Bacharel em Sistemas de Informação</h3>
+          <p class="timeline-text">
+            Me deu a lente para enxergar sistemas completos — não apenas como construir, mas como os dados se organizam, como as páginas se conectam, como a informação flui entre o usuário e o negócio.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label">Disciplina Analítica</div>
+          <h3 class="timeline-title">Mercado Financeiro</h3>
+          <p class="timeline-text">
+            Anos no mercado financeiro — onde decisões mal fundamentadas têm custo real e imediato — me deram a disciplina analítica para projetar com responsabilidade.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label">Re-aprendizado Atual</div>
+          <h3 class="timeline-title">LLMs, Agentes de IA e Desenvolvimento Assistido</h3>
+          <p class="timeline-text">
+            O que está em construção agora é o re-aprendizado das ferramentas atuais para aplicar essa mesma abordagem a projetos digitais para pequenos e médios negócios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM -->
+  <section class="para-quem" aria-label="Para quem é este trabalho">
+    <div class="para-quem-bg" data-parallax data-speed="0.1"></div>
+    <div class="para-quem-content">
+      <div class="section-label reveal" style="justify-content:center">Para Quem É Este Trabalho</div>
+      <p class="para-quem-text reveal reveal-delay-1">
+        Empresas que precisam de <strong>projeto digital de qualidade</strong> — não de um site genérico — mas cujo orçamento inviabiliza grandes agências. O trabalho é entregar um projeto executivo claro, adaptado ao negócio, sem exigir que a empresa se reestruture para caber na solução.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" aria-label="Contato">
+    <div class="cta-content">
+      <h2 class="cta-title reveal">Vamos desenhar a sua solução?</h2>
+      <p class="cta-text reveal reveal-delay-1">
+        Conte com arquitetura clara, documentada e pronta para implementar.
+      </p>
+      <a href="https://wa.me/SEU_NUMERO?text=Ol%C3%A1%20Eduardo%2C%20encontrei%20sua%20p%C3%A1gina%20sobre"
+         class="cta-btn reveal reveal-delay-2" target="_blank" rel="noopener"
+         aria-label="Conversar no WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-text">edu.sidegum — Arquitetura de Soluções Digitais</p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  // ===== SCROLL PROGRESS BAR =====
+  const progress = document.getElementById('scrollProgress');
+  // ===== NAV SCROLLED STATE =====
+  const nav = document.getElementById('nav');
+
+  function onScroll(){
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+    if(scrollTop > 60){ nav.classList.add('scrolled'); }
+    else{ nav.classList.remove('scrolled'); }
+    // Parallax
+    parallaxElements.forEach(function(el){
+      const speed = parseFloat(el.dataset.speed) || 0.2;
+      const rect = el.getBoundingClientRect();
+      if(rect.bottom > 0 && rect.top < window.innerHeight){
+        const offset = (rect.top - window.innerHeight / 2) * speed * -1;
+        el.style.transform = 'translate3d(0,' + offset.toFixed(2) + 'px,0)';
+      }
+    });
+  }
+
+  // ===== PARALLAX =====
+  const parallaxElements = document.querySelectorAll('[data-parallax]');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!prefersReduced){
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ===== INTERSECTION OBSERVER (REVEAL) =====
+  const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  // ===== SMOOTH SCROLL (nav links) =====
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ===== TYPING EFFECT on hero tagline (subtle) =====
+  if(!prefersReduced){
+    const tagline = document.querySelector('.hero-tagline');
+    if(tagline){
+      const original = tagline.innerHTML;
+      // Keep it simple — no full typing, just a subtle fade already handled by CSS
+    }
+  }
+})();
+</script>
+</body>
+</html>
