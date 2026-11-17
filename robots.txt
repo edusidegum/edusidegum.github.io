@@ -9,6 +9,29 @@ Disallow: /menu/
 # Disallow: /perfil/
 # (adicione /projeto/ conforme necessidade)
 
+# ── FITPoint ──
+User-agent: *
+Allow: /fitpoint/
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
+
+# Motores generativos
+User-agent: GPTBot
+Allow: /fitpoint/
+
+User-agent: Claude-Web
+Allow: /fitpoint/
+
+User-agent: Google-Extended
+Allow: /fitpoint/
+
+User-agent: CCBot
+Allow: /fitpoint/
+
+User-agent: PerplexityBot
+Allow: /fitpoint/
+
+
 # ── Busca / respostas de IA (citação permitida) ──
 User-agent: Googlebot
 Allow: /
