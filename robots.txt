@@ -10,26 +10,43 @@ Disallow: /menu/
 # (adicione /projeto/ conforme necessidade)
 
 # ── FITPoint ──
+
+# robots.txt — raiz do domínio edusidegum.com.br
+# Este arquivo só tem efeito se publicado em /robots.txt na raiz.
+# A cópia em /fitpoint/ é ignorada por todos os crawlers.
+
 User-agent: *
-Allow: /fitpoint/
+Allow: /
 Disallow: /fitpoint/pre-cadastro.html
 Disallow: /fitpoint/detalhes-operacionais.html
 
-# Motores generativos
 User-agent: GPTBot
-Allow: /fitpoint/
+Allow: /
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
 
 User-agent: Claude-Web
-Allow: /fitpoint/
+Allow: /
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
 
 User-agent: Google-Extended
-Allow: /fitpoint/
+Allow: /
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
 
 User-agent: CCBot
-Allow: /fitpoint/
+Allow: /
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
 
 User-agent: PerplexityBot
-Allow: /fitpoint/
+Allow: /
+Disallow: /fitpoint/pre-cadastro.html
+Disallow: /fitpoint/detalhes-operacionais.html
+
+Sitemap: https://edusidegum.com.br/fitpoint/sitemap.xml
+
 
 
 # ── Busca / respostas de IA (citação permitida) ──
